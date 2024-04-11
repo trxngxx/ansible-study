@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- name: Install Nginx
+  hosts: webservers
+  become: true
   tasks:
-    - name: install nginx
-      apt: name=nginx state=latest
-    - name: start nginx
-      service:
-          name: nginx
-          state: started
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: inventory_hostname in ['192.168.80.186', '192.168.80.196', '192.168.80.195']

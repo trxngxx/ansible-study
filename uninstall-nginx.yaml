@@ -1,0 +1,20 @@
+---
+- name: Uninstall Nginx
+  hosts: all
+  become: true
+  tasks:
+    - name: Stop Nginx service
+      service:
+        name: nginx
+        state: stopped
+      ignore_errors: yes  # Bỏ qua lỗi nếu dịch vụ không tồn tại hoặc không chạy
+
+    - name: Remove Nginx
+      apt:
+        name: nginx
+        state: absent
+
+    - name: Ensure Nginx service is not running
+      service:
+        name: nginx
+        state: stopped
