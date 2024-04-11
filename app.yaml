@@ -1,0 +1,24 @@
+---
+- name: Install applications
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Nginx on webservers
+      apt:
+        name: nginx
+        state: present
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
+
+    - name: Install Node.js on backend servers
+      apt:
+        name: 
+          - nodejs
+          - npm
+        state: present
+      when: "'{{ inventory_hostname }}' in groups['be']"
+
+    - name: Install PostgreSQL on database servers
+      apt:
+        name: postgresql
+        state: present
+      when: "'{{ inventory_hostname }}' in groups['dbservers']"
