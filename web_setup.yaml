@@ -1,6 +1,6 @@
 ---
 - name: Deploy Web Application with Nginx on Frontend
-  hosts: all  # Thay đổi thành 'all' để Ansible có thể tìm kiếm tất cả các máy chủ trong file /etc/ansible/hosts
+  hosts: all
   vars:
     port: 8080
 
@@ -19,8 +19,8 @@
     - name: Copy Nginx configuration file
       template:
         src: "nginx.conf.j2"
-        dest: "/etc/nginx/sites-available/web"
-      notify: "services"
+        dest: "/etc/nginx/sites-enabled/web"
+      notify: "Restart Nginx service"
 
     - name: Copy registration form HTML file
       copy:
