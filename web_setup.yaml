@@ -16,17 +16,20 @@
       file:
         path: "/var/www/html"
         state: directory
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
 
     - name: Copy Nginx configuration file
       template:
         src: "nginx.conf.j2"
         dest: "/etc/nginx/sites-enabled/web"
       notify: "Restart Nginx service"
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
 
     - name: Copy registration form HTML file
       copy:
         src: "registration_form.html"
         dest: "/var/www/html/registration_form.html"
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
 
     - name: Create webpage
       copy:
@@ -37,6 +40,7 @@
       service:
         name: nginx
         state: started
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
 
   handlers:
     - name: Restart Nginx service
