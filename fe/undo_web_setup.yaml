@@ -1,0 +1,23 @@
+---
+- name: Undo Nginx Setup on Web Server
+  hosts: webservers
+  tasks:
+    - name: Stop Nginx service
+      service:
+        name: nginx
+        state: stopped
+
+    - name: Remove Nginx package
+      package:
+        name: nginx
+        state: absent
+
+    - name: Remove Nginx configuration file
+      file:
+        path: "/etc/nginx/sites-available/web"
+        state: absent
+
+    - name: Remove web content directory
+      file:
+        path: "/var/www/html"
+        state: absent
