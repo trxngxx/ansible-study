@@ -1,0 +1,19 @@
+---
+- name: Uninstall PostgreSQL
+  hosts: 192.168.80.195
+  become: true
+  tasks:
+    - name: Stop PostgreSQL service
+      service:
+        name: postgresql
+        state: stopped
+
+    - name: Remove PostgreSQL package
+      apt:
+        name: postgresql
+        state: absent
+
+    - name: Remove PostgreSQL repo file
+      file:
+        path: /etc/apt/sources.list.d/pgdg.list
+        state: absent

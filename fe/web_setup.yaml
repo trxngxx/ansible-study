@@ -1,36 +1,40 @@
 ---
 - name: Deploy Web Application with Nginx on Frontend
-  hosts: all
+  hosts: webservers  # Assuming you have a group named 'webservers'
   vars:
     port: 8080
 
   tasks:
-    - name: Install Nginx on webservers
+    - name: Install Nginx
       apt:
         name: nginx
         state: present
-      when: "'{{ inventory_hostname }}' in groups['webservers']"
 
-    - name: Create directory for web content
+    - name: Setup Frontend with registration form (when applicable)
+      when: inventory_hostname in groups['webservers']
+      tasks:
+        - name: Copy frontend files and registration form
+          copy:
+            src: frontend/  # Assuming both files are in the same directory
+            dest: /var/www/html/
+          notify: restart nginx
+
+    - name: Create directory for web content (if needed)
       file:
         path: "/var/www/html"
         state: directory
 
-    - name: Copy Nginx configuration file
+    - name: Configure Nginx with template
       template:
         src: "nginx.conf.j2"
         dest: "/etc/nginx/sites-enabled/web"
-      notify: "Restart Nginx service"
+      notify: restart nginx
 
-    - name: Copy registration form HTML file
+    - name: Create a custom index page (optional)
       copy:
-        src: "registration_form.html"
-        dest: "/var/www/html/registration_form.html"
-
-    - name: Create webpage
-      copy:
-        content: "SETA International VN"
+        content: "<html><body>Your web application is here!</body></html>"  # Example content
         dest: "/var/www/html/index.html"
+      when: not inventory_hostname in groups['webservers']  # Optional, create only for non-webservers
 
     - name: Start Nginx service
       service:

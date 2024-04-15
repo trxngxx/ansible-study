@@ -1,0 +1,12 @@
+---
+- name: Install Node.js on backend server
+  hosts: be
+  become: true
+  tasks:
+    - name: Install Node.js and npm
+      apt:
+        name: 
+          - nodejs
+          - npm
+        state: present
+      when: "'{{ inventory_hostname }}' in groups['be']"
