@@ -3,7 +3,7 @@
   hosts: all
   vars:
     port: 8080
-    domain_name: "test2.seta-international.vn"
+    domain_name: "test3.seta-international.vn"
 
   tasks:
     - name: Install Nginx on webservers
