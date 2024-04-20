@@ -1,0 +1,24 @@
+- hosts: db
+  tasks:
+    - name: Create database
+      mysql_db:
+        name: mydatabase
+        state: present
+
+    - name: Create user
+      mysql_user:
+        name: user
+        password: password
+        priv: 'mydatabase.*:ALL'
+
+- hosts: fe
+  tasks:
+    - name: Copy config file
+      template:
+        src: templates/config.j2
+        dest: /etc/app/config.yml
+
+    - name: Restart service
+      service:
+        name: nginx
+        state: restarted
