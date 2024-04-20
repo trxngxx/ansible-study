@@ -1,19 +1,21 @@
-become: true 
-tasks:
-  - name: Install python
-    apt:
-      name: python3
-      update_cache: yes
+- name: Install applications
+  hosts: all
+  become: true 
+  tasks:
+    - name: Install python
+      apt:
+        name: python3
+        update_cache: yes
       when: "'{{ inventory_hostname }}' in groups['be']"
 
-  - name: Install nginx
-    apt:
-      name: nginx
+    - name: Install nginx
+      apt:
+        name: nginx
       when: "'{{ inventory_hostname }}' in groups['webservers']"
 
-  - name: Install mysql
-    apt:
-      name: 
-        - mysql-server
-        - mysql-client
-      when: "'{{ inventory_hostname }}' in groups['db']"  
+    - name: Install mysql
+      apt:
+        name: 
+          - mysql-server
+          - mysql-client
+      when: "'{{ inventory_hostname }}' in groups['db']"
