@@ -18,4 +18,4 @@
         name: 
           - mysql-server
           - mysql-client
-      when: "'{{ inventory_hostname }}' in groups['db']"
+      when: "'{{ inventory_hostname }}' in groups['dbservers']"

@@ -1,17 +1,21 @@
-- hosts: db
+- hosts: dbservers
   tasks:
     - name: Create database
       mysql_db:
         name: mydatabase
         state: present
+        login_user: user
+        login_password: seta@123
 
     - name: Create user
       mysql_user:
-        name: user
-        password: password
+#        name: user
+#        password: seta@123
         priv: 'mydatabase.*:ALL'
+        login_user: user
+        login_password: seta@123 
 
-- hosts: fe
+- hosts: webservers
   tasks:
     - name: Copy config file
       template:
