@@ -1,6 +1,0 @@
----
-name: postgresql
-version: 1.0
-author: Ngo Tran
-description: Cài đặt và cấu hình PostgreSQL
-dependencies: []
