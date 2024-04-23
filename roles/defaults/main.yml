@@ -1,6 +1,7 @@
 ---
 # defaults file for roles
 ---
+postgresql_package: postgresql
 # RHEL/CentOS only. Set a repository to use for PostgreSQL installation.
 postgresql_enablerepo: ""
 

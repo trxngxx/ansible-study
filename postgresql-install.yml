@@ -1,0 +1,8 @@
+---
+- name: Install PostgreSQL
+  hosts: dbservers
+  become: yes
+  tasks:
+    - name: Install PostgreSQL
+      import_role:
+        name: roles
