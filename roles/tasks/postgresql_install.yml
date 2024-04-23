@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 - name: Install & Secure Mysql 8 on Ubuntu
   hosts: dbservers
   become: yes
@@ -87,3 +88,41 @@
         name: mysql
         state: restarted
 
+=======
+- name: Cài đặt gói PostgreSQL
+  apt:
+    name: "{{ postgresql_version }}"
+    state: latest
+  become: true
+
+- name: Khởi tạo thư mục dữ liệu PostgreSQL
+  file:
+    path: "{{ postgresql_data_dir }}"
+    state: directory
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_user }}"
+  become: true
+
+- name: Khởi tạo người dùng PostgreSQL
+  user:
+    name: "{{ postgresql_user }}"
+    shell: /bin/bash
+    password: "{{ lookup('vault', 'secret/postgresql/password') }}"
+    createhome: yes
+  become: true
+
+- name: Khởi tạo tệp cấu hình PostgreSQL
+  template:
+    src: templates/postgresql.conf.j2
+    dest: /etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_user }}"
+  become: true
+
+- name: Khởi tạo dịch vụ PostgreSQL
+  systemd:
+    name: postgresql-{{ postgresql_version }}
+    enabled: yes
+    state: started
+  become: true
+>>>>>>> 52e80f831c21c83d605a455f93c596c369d75830
