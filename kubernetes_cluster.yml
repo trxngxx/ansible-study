@@ -3,4 +3,4 @@
   hosts: 192.168.80.245
   become: true
   roles:
-    - k8s-role
+    - tcharl.kubernetes
