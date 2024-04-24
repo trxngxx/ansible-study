@@ -38,12 +38,12 @@
     state: directory
     mode: 0755
 
-- name: Symlink the kubectl admin.conf to ~/.kube/conf.
-  file:
-    src: /etc/kubernetes/admin.conf
-    dest: ~/.kube/config
-    state: link
-    mode: 0644
+#- name: Symlink the kubectl admin.conf to ~/.kube/conf.
+#  file:
+#    src: /etc/kubernetes/admin.conf
+#    dest: ~/.kube/config
+#    state: link
+#    mode: 0644
 
 - name: Configure Flannel networking.
   command: "kubectl apply -f {{ kubernetes_flannel_manifest_file }}"
