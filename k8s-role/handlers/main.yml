@@ -1,2 +1,4 @@
 ---
-# handlers file for k8s-role
+- name: restart kubelet
+  service: name=kubelet state=restarted
+
