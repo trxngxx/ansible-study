@@ -46,7 +46,7 @@
 #    mode: 0644
 
 - name: Configure Flannel networking.
-  command: "kubectl apply -f {{ kubernetes_flannel_manifest_file }} --validate=false"
+  command: "kubectl apply -f {{ kubernetes_flannel_manifest_file }}"
   register: flannel_result
   changed_when: "'created' in flannel_result.stdout"
   when: kubernetes_pod_network.cni == 'flannel'
