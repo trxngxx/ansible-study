@@ -45,14 +45,14 @@
 #    state: link
 #    mode: 0644
 
-- name: Configure Flannel networking.
-  command: "kubectl apply -f {{ kubernetes_flannel_manifest_file }}"
-  register: flannel_result
-  changed_when: "'created' in flannel_result.stdout"
-  when: kubernetes_pod_network.cni == 'flannel'
-  until: flannel_result is not failed
-  retries: 12
-  delay: 5
+#- name: Configure Flannel networking.
+#  command: "kubectl apply -f {{ kubernetes_flannel_manifest_file }}"
+#  register: flannel_result
+#  changed_when: "'created' in flannel_result.stdout"
+#  when: kubernetes_pod_network.cni == 'flannel'
+#  until: flannel_result is not failed
+#  retries: 5
+#  delay: 2
 
 - name: Configure Calico networking.
   kubernetes.core.k8s:
