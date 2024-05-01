@@ -9,8 +9,8 @@
       apt:
         update_cache: yes
 
-    - name: reboot and wait for reboot to complete
-      reboot:
+    #- name: reboot and wait for reboot to complete
+    #  reboot:
 
     - name: disable SWAP (Kubeadm requirement)
       shell: |
