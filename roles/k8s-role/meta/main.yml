@@ -9,7 +9,7 @@ galaxy_info:
   license: "license (BSD, MIT)"
   min_ansible_version: 2.10
   platforms:
-    - name: Ubuntu
+    - name: Debian
       versions:
         - jammy
   galaxy_tags:

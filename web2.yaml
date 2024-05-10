@@ -1,0 +1,20 @@
+---
+- name: Deploy Web Application with Nginx on Frontend
+  hosts: all
+  vars:
+    port: 8090
+    domain_name: "test1.seta-international.vn"
+
+  tasks:
+    - name: Copy Nginx configuration file
+      template:
+        src: "nginx.conf.j2"
+        dest: "/etc/nginx/sites-enabled/web"
+      notify: "Restart Nginx service"
+      when: "'{{ inventory_hostname }}' in groups['webservers']"
+    
+  handlers:
+    - name: Restart Nginx service
+      service:
+        name: nginx
+        state: started

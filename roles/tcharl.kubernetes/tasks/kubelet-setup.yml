@@ -1,10 +1,4 @@
 ---
-
-# ---- DEPRECATED ----------------
-#
-# Most of the kubernetes_kubelet_extra_args are deprecated. See https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet for details.
-# Use the kubernetes_kubelet_config variable instead, which will be used to create the kubelet config file.
-
 - name: Check for existence of kubelet environment file. (deprecated)
   stat:
     path: '{{ kubelet_environment_file_path }}'
