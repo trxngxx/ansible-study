@@ -1,4 +1,3 @@
-  tasks:
     - name: install Kubectl
       apt:
         name: kubectl=1.29.*
