@@ -132,11 +132,3 @@
         name: net.ipv4.ip_forward
         value: 1
 
-- hosts: master
-  become: yes
-  tasks:
-    - name: install Kubectl
-      apt:
-        name: kubectl=1.29.*
-        state: present
-        force: yes # allow downgrades
