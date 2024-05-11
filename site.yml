@@ -3,6 +3,8 @@
 
   tasks:
     - import_tasks: roles/common/tasks/main.yml
+    - import_tasks: roles/master/tasks/before.yml
     - import_tasks: roles/master/tasks/main.yml
+    - import_tasks: roles/master/tasks/after.yml
     - import_tasks: roles/workers/tasks/main.yml
 
