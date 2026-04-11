@@ -1,0 +1,25 @@
+# Build and dependency caches
+/target
+/.mvn
+
+# IDE/OS files
+.idea
+.vscode
+*.iml
+.DS_Store
+
+# VCS metadata
+.git
+.gitignore
+
+# Logs and reports
+logs
+*.log
+surefire-reports
+
+# Local environment files
+.env
+*.local
+
+# Documentation and misc
+README.md
